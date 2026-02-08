@@ -96,7 +96,7 @@ button:hover { transform:scale(1.1); }
   100%{transform:scale(1);}
 }
 
-/* sparkle */
+/* sparkle cursor */
 .sparkle {
   position:fixed;
   pointer-events:none;
@@ -111,7 +111,7 @@ button:hover { transform:scale(1.1); }
 
 <body>
 
-<!-- background music (ADD YOUR MUSIC FILE NAME HERE) -->
+<!-- background music -->
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -127,8 +127,8 @@ button:hover { transform:scale(1.1); }
 <!-- PAGE 2 -->
 <div class="page" id="p2">
   <h2>What do I like the most? 🤭</h2>
-  <button onclick="popup('Wrong 😝<br>Not talking to you 💔')">Momos</button>
-  <button onclick="popup('Nopeee 😆<br>Try again 💕')">Pizza</button>
+  <button onclick="correct('Wrong 😝<br>Not talking to you 💔',2)">Momos</button>
+  <button onclick="correct('Nopeee 😆<br>Try again 💕',2)">Pizza</button>
   <button onclick="correct('Yayyy 😭💖<br>I love you 🌷',3)">Pulau</button>
 </div>
 
@@ -143,9 +143,9 @@ button:hover { transform:scale(1.1); }
 <div class="page" id="p4">
   <img src="arusi2.jpeg" class="photo">
   <h2>My birth year? 🎂</h2>
-  <button onclick="popup('Aww wrong 😔')">2006</button>
-  <button onclick="popup('Nope 😅')">2009</button>
-  <button onclick="popup('Almost 😆')">2005</button>
+  <button onclick="correct('Aww wrong 😔',4)">2006</button>
+  <button onclick="correct('Nope 😅',4)">2009</button>
+  <button onclick="correct('Almost 😆',4)">2005</button>
   <button onclick="correct('You know me so well 🥹💖',5)">2007</button>
 </div>
 
@@ -166,30 +166,27 @@ button:hover { transform:scale(1.1); }
 </div>
 
 <script>
-/* pages */
 function nextPage(n){
   document.querySelector('.active').classList.remove('active');
-  document.getElementById('p'+n).classList.add('active');
+  document.getElementById("p"+n).classList.add('active');
 }
 
-/* popup */
-function popup(msg){
-  popupText.innerHTML = msg;
-  popup.style.display = "flex";
-}
-function closePopup(){ popup.style.display="none"; }
-function correct(msg,n){
-  popup(msg);
-  setTimeout(()=>{ closePopup(); nextPage(n); },1200);
+/* Correct answer / popup */
+function correct(msg,next){
+  document.getElementById("popupText").innerHTML = msg;
+  document.getElementById("popup").style.display = "flex";
+  setTimeout(()=>{
+    document.getElementById("popup").style.display = "none";
+    document.querySelector('.active').classList.remove('active');
+    document.getElementById("p"+next).classList.add('active');
+  },1200);
 }
 
-/* dodging button */
 noLove.addEventListener("mouseover",()=>{
   noLove.style.left = Math.random()*70+"vw";
   noLove.style.top = Math.random()*70+"vh";
 });
 
-/* typing text */
 const text="I love you so so so much Arusi 🌷💖";
 let i=0;
 function typeText(){
@@ -200,9 +197,10 @@ function typeText(){
 }
 p5.addEventListener("click",typeText);
 
-/* secret */
 secretBtn.addEventListener("click",()=>{
-  popup("Arusi 🌷<br>You are my favorite person 💖<br>You make my heart smile every day 🫶<br>I love you endlessly 💞");
+  document.getElementById("popupText").innerHTML =
+  "Arusi 🌷<br>You are my favorite person 💖<br>You make my heart smile every day 🫶<br>I love you endlessly 💞";
+  document.getElementById("popup").style.display = "flex";
 });
 
 /* slideshow */
@@ -246,9 +244,7 @@ document.addEventListener("mousemove",e=>{
 });
 
 /* music */
-function startMusic(){
-  document.getElementById("bgMusic").play();
-}
+function startMusic(){ document.getElementById("bgMusic").play(); }
 </script>
 
 </body>

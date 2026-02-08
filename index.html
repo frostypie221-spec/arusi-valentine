@@ -111,13 +111,8 @@ button:hover { transform:scale(1.1); }
 
 <body>
 
-<!-- background music -->
-<audio id="bgMusic" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
 <!-- PAGE 1 -->
-<div class="page active" id="p1" onclick="startMusic()">
+<div class="page active" id="p1">
   <img id="slide" class="photo" src="arusi1.jpeg">
   <h1 class="glow">Arusi 🌷</h1>
   <h2>Will you be my Valentine? 💖</h2>
@@ -242,9 +237,6 @@ document.addEventListener("mousemove",e=>{
   document.body.appendChild(s);
   setTimeout(()=>s.remove(),1000);
 });
-
-/* music */
-function startMusic(){ document.getElementById("bgMusic").play(); }
 </script>
 
 </body>

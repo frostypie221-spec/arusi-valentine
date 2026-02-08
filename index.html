@@ -2,33 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Arusi 💖</title>
+<title>For Arusi 🌷</title>
 
 <style>
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ffd6e8, #fff1f7);
+  background: linear-gradient(135deg, #ffe6f0, #fffafc);
   overflow: hidden;
   text-align: center;
 }
 
-/* Pages */
 .page {
   display: none;
   min-height: 100vh;
   padding: 40px 20px;
 }
-.page.active {
-  display: block;
-}
+.page.active { display: block; }
 
-/* Text */
 h1, h2 {
-  color: #ff2e63;
+  color: #ff3b7a;
 }
 
-/* Buttons */
+/* glowing name */
+.glow {
+  font-size: 2.2rem;
+  animation: glow 2s ease-in-out infinite;
+}
+@keyframes glow {
+  0% { text-shadow: 0 0 5px #ff9acb; }
+  50% { text-shadow: 0 0 20px #ff5fa2; }
+  100% { text-shadow: 0 0 5px #ff9acb; }
+}
+
 button {
   padding: 14px 28px;
   margin: 10px;
@@ -36,77 +42,65 @@ button {
   border-radius: 30px;
   font-size: 1rem;
   cursor: pointer;
-  background: #ff4d6d;
+  background: #ff5c8a;
   color: white;
   transition: 0.3s;
 }
-button:hover {
-  transform: scale(1.08);
-}
+button:hover { transform: scale(1.1); }
 
-/* Photos */
 .photo {
-  width: 200px;
+  width: 210px;
   border-radius: 25px;
   margin: 15px;
-  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
 }
 
-/* Floating items */
 .float {
   position: absolute;
-  animation: floatUp 7s linear infinite;
+  animation: floatUp 8s linear infinite;
   pointer-events: none;
 }
-
 @keyframes floatUp {
-  from { transform: translateY(100vh); opacity: 1; }
+  from { transform: translateY(110vh); opacity: 1; }
   to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* Dodging button */
-#noLove {
-  position: absolute;
-}
-
-/* Popup overlay */
 #popup {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(255, 192, 203, 0.6);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 200, 220, 0.6);
+  backdrop-filter: blur(8px);
   z-index: 999;
   align-items: center;
   justify-content: center;
 }
-
-/* Popup box */
 #popupBox {
   background: #fff0f6;
   padding: 30px;
   border-radius: 25px;
   width: 80%;
   max-width: 320px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
   animation: pop 0.4s ease;
 }
-
 @keyframes pop {
   from { transform: scale(0.7); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
-/* Secret button */
-#secretBtn {
-  display: none;
-  background: #ff85a2;
-  animation: pulse 1.5s infinite;
+#noLove {
+  position: absolute;
 }
 
+#secretBtn {
+  display: none;
+  background: #ff8fb3;
+  animation: pulse 1.5s infinite;
+}
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.12); }
+  50% { transform: scale(1.15); }
   100% { transform: scale(1); }
 }
 </style>
@@ -116,138 +110,113 @@ button:hover {
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-  <!-- CHANGE PHOTO HERE -->
   <img src="arusi1.jpeg" class="photo">
-
-  <h1>Hey Arusi 💖</h1>
-  <h2>Will you be my Valentine?</h2>
+  <h1 class="glow">Arusi 🌷</h1>
+  <h2>Will you be my Valentine? 💖</h2>
   <button onclick="nextPage(2)">Yes 💘</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-  <h2>What do I like the most? 🤔</h2>
-  <button onclick="showPopup('Wrong 😝<br>Not talking to you 💔')">Momos</button>
-  <button onclick="showPopup('Nopeee 😆<br>Try again 💕')">Pizza</button>
-  <button onclick="rightAnswer('Yeyyy 💖<br>I love youuu 😭🌷', 3)">Pulau</button>
+  <h2>What do I like the most? 🤭</h2>
+  <button onclick="popup('Wrong 😝<br>Not talking to you 💔')">Momos</button>
+  <button onclick="popup('Nopeee 😆<br>Try again 💕')">Pizza</button>
+  <button onclick="correct('Yayyy 😭💖<br>I love youuu 🌷',3)">Pulau</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
   <h2>Do you love me? 🥺</h2>
-  <button onclick="rightAnswer('I KNEW IT 😭💖<br>You’re the cutest 🫶', 4)">Yes 💞</button>
+  <button onclick="correct('I knew it 😭💞',4)">Yes 💖</button>
   <button id="noLove">No 🙃</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-  <!-- CHANGE PHOTO HERE -->
   <img src="arusi2.jpeg" class="photo">
-
   <h2>My birth year? 🎂</h2>
-  <button onclick="showPopup('Aww wrong 😔💔')">2006</button>
-  <button onclick="showPopup('Nopeee 😝')">2009</button>
-  <button onclick="showPopup('Hmm almost 😅')">2005</button>
-  <button onclick="rightAnswer('You know me so well 🥹❤️', 5)">2007</button>
+  <button onclick="popup('Aww wrong 😔')">2006</button>
+  <button onclick="popup('Nopee 😅')">2009</button>
+  <button onclick="popup('Almost 😆')">2005</button>
+  <button onclick="correct('You know me so well 🥹💖',5)">2007</button>
 </div>
 
 <!-- FINAL PAGE -->
 <div class="page" id="p5">
-  <!-- CHANGE PHOTO HERE -->
   <img src="arusi3.jpeg" class="photo">
-
   <h1 id="finalText"></h1>
-  <button id="secretBtn">Tap for a secret 💌</button>
+  <button id="secretBtn">Final secret 💌</button>
 </div>
 
 <!-- POPUP -->
 <div id="popup">
   <div id="popupBox">
     <h2 id="popupText"></h2>
-    <div style="font-size:2rem;">💖🌷✨</div>
+    <div style="font-size:2rem;">🌷💖✨</div>
     <br>
     <button onclick="closePopup()">Okay 🥰</button>
   </div>
 </div>
 
 <script>
-/* Page switching */
-function nextPage(n) {
+function nextPage(n){
   document.querySelector('.active').classList.remove('active');
-  document.getElementById('p' + n).classList.add('active');
+  document.getElementById('p'+n).classList.add('active');
 }
 
-/* Cute popup */
-function showPopup(msg) {
-  document.getElementById("popupText").innerHTML = msg;
-  document.getElementById("popup").style.display = "flex";
+function popup(msg){
+  popupText.innerHTML = msg;
+  popup.style.display = "flex";
 }
-function closePopup() {
-  document.getElementById("popup").style.display = "none";
-}
+function closePopup(){ popup.style.display = "none"; }
 
-/* Correct answer */
-function rightAnswer(msg, next) {
-  showPopup(msg);
-  setTimeout(() => {
-    closePopup();
-    nextPage(next);
-  }, 1200);
+function correct(msg,n){
+  popup(msg);
+  setTimeout(()=>{ closePopup(); nextPage(n); },1200);
 }
 
-/* Dodging NO button */
-const noBtn = document.getElementById("noLove");
-if (noBtn) {
-  noBtn.addEventListener("mouseover", () => {
-    noBtn.style.left = Math.random() * 70 + "vw";
-    noBtn.style.top = Math.random() * 70 + "vh";
-  });
-}
-
-/* Final typing text */
-const text = "I love you so so so much Arusi 💖🌷";
-let i = 0;
-
-function typeText() {
-  if (i < text.length) {
-    document.getElementById("finalText").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeText, 90);
-  } else {
-    document.getElementById("secretBtn").style.display = "inline-block";
-  }
-}
-
-document.getElementById("p5").addEventListener("click", typeText);
-
-/* Secret message */
-document.getElementById("secretBtn").addEventListener("click", () => {
-  showPopup(
-    "Arusi 💗<br>You are the cutest and most beautiful person in my life 🌷<br>You make my heart so happy every day 🫶<br>I love you forever 💞"
-  );
+noLove.addEventListener("mouseover",()=>{
+  noLove.style.left = Math.random()*70+"vw";
+  noLove.style.top = Math.random()*70+"vh";
 });
 
-/* Floating hearts */
-setInterval(() => {
-  const h = document.createElement("div");
-  h.className = "float";
-  h.innerHTML = "💖";
-  h.style.left = Math.random() * 100 + "vw";
-  h.style.fontSize = Math.random() * 20 + 15 + "px";
-  document.body.appendChild(h);
-  setTimeout(() => h.remove(), 7000);
-}, 350);
+const text = "I love you so so so much Arusi 🌷💖";
+let i=0;
+function typeText(){
+  if(i<text.length){
+    finalText.innerHTML += text[i++];
+    setTimeout(typeText,90);
+  } else {
+    secretBtn.style.display="inline-block";
+  }
+}
+p5.addEventListener("click", typeText);
 
-/* Floating tulips */
-setInterval(() => {
-  const t = document.createElement("div");
-  t.className = "float";
-  t.innerHTML = "🌷";
-  t.style.left = Math.random() * 100 + "vw";
-  t.style.fontSize = "22px";
+secretBtn.addEventListener("click",()=>{
+  popup("Arusi 🌷<br>You are my favorite person 💖<br>You make my days brighter and my heart happier 🫶<br>I love you endlessly 💞");
+});
+
+/* floating tulips */
+setInterval(()=>{
+  const t=document.createElement("div");
+  t.className="float";
+  t.innerHTML="🌷";
+  t.style.left=Math.random()*100+"vw";
+  t.style.fontSize="24px";
   document.body.appendChild(t);
-  setTimeout(() => t.remove(), 8000);
-}, 500);
+  setTimeout(()=>t.remove(),8000);
+},350);
+
+/* heart rain */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="float";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize="18px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},300);
 </script>
 
 </body>
